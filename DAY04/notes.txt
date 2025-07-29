@@ -87,6 +87,25 @@ LABEL mail="kkeducationblr@gmail.com"
 
 NOTE: More than one LABEL will allow in image
 
+How to copy files from system to continer and container to system?
+--------------------------------------------------------------------
+docker cp five:/usr/local/tomcat/logs/catalina.2025-05-17.log catalina.2025-05-17.log
+docker cp demo.txt javawebapp:/usr/local/tomcat/
+
+Q: what is the diff between COPY and docker cp?
+COPY is a docker file instruction using this we can copy to the image while building files/folders 
+docker cp Is a command copy files/dirs to container or to a system
+
+what is the use of docker diff?
+-------------------------------docker diff <cid/cname>
+=============================================
+How to inspect a container?
+---------------------------
+docker inspect <cid/cname>
+docker inspect --format "{{.NetworkSettings.IPAddress}}" mavenapp
+docker inspect --format "{{.State.Pid}}" 0d2dab452ceb
+docker inspect --format "{{.NetworkSettings.IPAddress}},{{.State.Status}}" 0d2dab452ceb
+docker inspect --format "IP Address: {{.NetworkSettings.Networks.bridge.IPAddress}}, Name: {{.Name}}" mavenapp
 
 
 
@@ -103,9 +122,15 @@ NOTE: More than one LABEL will allow in image
 COPY <src> <dest>
 
 Purpose: Copies files or directories from the host machine to the image. The source path is relative to the build context (the directory containing the Dockerfile), and the destination path is inside the image.
-
+get the file from container to local
+----------------------------------
+ docker cp javawebapp:/usr/local/tomcat/logs/localhost.2025-07-29.log localhost.2025-07-29.log
+copy file from local to container
+--------------------------
+docker cp test.sh javawebapp:/usr/local/tomcat
 
 Example: COPY target/mavan-web-application.war /usr/local/tomcat/webapps/maven-web-application.war
+
 
          COPY . .
     
