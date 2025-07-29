@@ -101,23 +101,8 @@ docker run --memory="512m" -d -p 8082:8080 --name javawebapp2 kkeducation12345/j
 docker run --memory="64m" -d -p 8082:8080 --name javawebapp2 kkeducation12345/java-web-app:1  --> Here container will be killed.
 docker inspect <cid> --> OOMKilled
 
-How to copy files from system to continer and container to system?
---------------------------------------------------------------------
-docker cp five:/usr/local/tomcat/logs/catalina.2025-05-17.log catalina.2025-05-17.log
-docker cp demo.txt javawebapp:/usr/local/tomcat/
-Q: what is the diff between COPY and docker cp?
-COPY is a docker file instruction using this we can copy to the image while building files/folders 
-docker cp Is a command copy files/dirs to container or to a system
-what is the use of docker diff?
--------------------------------docker diff <cid/cname>
+
 what is docker commit? create image from running container
 -----------------------
 docker commit <cid/cname> kkeducation12345/java-web-app:24
 ===========================================================
-How to inspect a container?
----------------------------
-docker inspect <cid/cname>
-docker inspect --format "{{.NetworkSettings.IPAddress}}" mavenapp
-docker inspect --format "{{.State.Pid}}" 0d2dab452ceb
-docker inspect --format "{{.NetworkSettings.IPAddress}},{{.State.Status}}" 0d2dab452ceb
-docker inspect --format "IP Address: {{.NetworkSettings.Networks.bridge.IPAddress}}, Name: {{.Name}}" mavenapp
