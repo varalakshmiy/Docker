@@ -12,7 +12,7 @@ EX: ENTRYPOINT java -jar app.jar  --> shell form
 
 
 IQ] what is the difference between CMD and ENTRYPOINT?
-ANS:
+ANS: both r docker file instru
 
   --> CMD instructions are overriden while creating a container, But ENTRYPOINT instructions can't be overrriden while creating a container.
   --> Both the instructions are used to start our container.
