@@ -137,13 +137,6 @@ add also docker file instru copy files and dir to linux machine to docker image 
 add url destination
 
 
-
-
-
-
-
-
-
 6. RUN 
 ------
 --> RUN instruction used to execute a commands/ scripts etc.
