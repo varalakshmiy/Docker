@@ -14,7 +14,7 @@ docker start javawebapp
 
 docker run -d -p 8080:8080 --name javawebapp1 kkeducation12345/java-web-app
 
-
+build context: location of docker image is called build context
 How to list the running containers?
 -----------------------------------
 
