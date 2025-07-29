@@ -1,77 +1,50 @@
 Container commands
 ==================
-
 How to create a container?
 --------------------------
-
 docker create : It will create a container, But it will not start the container(process)
-
 docker run : It will create a container and it will start the container(process)
-
 docker create -p 8080:8080 --name javawebapp kkeducation12345/java-web-app
-
 docker start javawebapp
-
 docker run -d -p 8080:8080 --name javawebapp1 kkeducation12345/java-web-app
 
-build context: location of docker image is called build context
 How to list the running containers?
 -----------------------------------
-
 docker ps or docker container ls --> running containers
-
 docker ps -a or docker container ls -a --> All the containers
-
-
 How to start and stop containers?
 ----------------------------------
-
 docker start <cid>
-
 docker stop <cid>
 
 How to delete containers?
 --------------------------
-
 docker rm <cid> --> for stopped state containers
-
 docker rm -f <cid>  ---> for running containers
-
 How to remove all conatners?
 -----------------------------
-
 docker rm -f <cid> <cid> ......
-
 docker rm -f $(docker ps -q) --> It will remove all running conainers
-
 docker rm -f $(docker ps -aq) --> It will remove all conainers
-
-
 How to remove all stopeed conatainers?
 --------------------------------------
-
-docker container prune
-
+docker container prune===help u to remove only stoped containers,
 docker rm -f $(docker ps --filter status="exited" -aq)
-
-
 How to rename the container?
-----------------------------
-
-docker rename <cid/name> <new name>
+-docker rename <cid/name> <new name>
+docker inspect -f '{{.state.startedAt}}' <containerid>
+docker inspect -f '{{.state.status}}' <containerid>
+dangling images:
+if any image repository and tag is showing as none is called dangling images,container is running state i am trying to delete forcefully 
+>docker images -f dangling=true
+>docker images -f dangling=true  -q   =displayed only ids
+we cannot remove dangling images until container stoped state.
 
 how to restart the container?
 -----------------------------
-
 docker restart <cid/cname>
-
-
-
-IQ: what is the difference between docker create and run?
-
+Q: what is the difference between docker create and run?
 IQ: What is port publish or port mapping in docker?
-
-
 IQ: What is the difference between docker stop and docker kill?
 
 
@@ -88,121 +61,63 @@ How to pause the container process?
 
 docker pause <cid/cname>
 docker unpause <cid/cname>
-
+docker ps --filter status="paused"
+docker ps --filter status="paused" -q =====it will display obly paused container ids
+--cm to unpause containers----
+>docker unpause $(docker ps --filter status="paused" -q)
 How to delete only paused containers?
 -------------------------------------
 docker rm -f $(docker ps --filter status="paused")
-
 ===================================================================
-
-
+stattes of container:stoped,paused,existed 
 docker run --name ubuntucontainer ubuntu
-
 docker ps -a
-
 docker start ubuntucontainer
-
-
 =====================================================================
-
 How to create a container in interative mode?
----------------------------------------------
-
-docker run -it --name test ubuntu /bin/bash
-
-
-
+---------------------------------------------docker run -it --name test ubuntu /bin/bash
 How to trobule shoot or debug application which is running as a container?
----------------------------------------------------------------------------
-
-docker logs <cid/cname>
-
+---------------------------------------------------------------------------docker logs <cid/cname>
 docker logs --tail <number_of_lines> <cid/cname>
-
 docker logs -f <cid/cname>
-
-
 How to go inside the container?
 -------------------------------
-
 docker exec -it <cid/name> /bin/bash
-
-
+    -ls -lrth
 execute commands on running container
 -------------------------------------
-
-docker exec 5a7b9937d4df ls 
-
+docker exec 5a7b9937d4df ls ===without going container inside
+docker exec one ls /usr/local/tomcat/webapps
 How to display whick process is running inside the container?
 -------------------------------------------------------------
-
 docker top <cid/cname>
-
-
-
-
 How to display resource(RAM,CPU) details?
 -----------------------------------------
-
-docker stats <cid/cname>
-
+docker stats <cid/cname>==hw can check cpu/m/y
+docker run -d --memory="100m" -p 8081:8087 --name welcome1 varalakshmi089/maven-web-application:9.0.1
 IQ: Is it possible to allocate cutom memory?
-
 Ans: Yes
-
 docker run --memory="512m" -d -p 8082:8080 --name javawebapp2 kkeducation12345/java-web-app:1
-
 docker run --memory="64m" -d -p 8082:8080 --name javawebapp2 kkeducation12345/java-web-app:1  --> Here container will be killed.
-
 docker inspect <cid> --> OOMKilled
-
-
 
 How to copy files from system to continer and container to system?
 --------------------------------------------------------------------
-
-
 docker cp five:/usr/local/tomcat/logs/catalina.2025-05-17.log catalina.2025-05-17.log
-
-
 docker cp demo.txt javawebapp:/usr/local/tomcat/
-
-
-
-IQ: what is the diff between COPY and docker cp?
-
+Q: what is the diff between COPY and docker cp?
 COPY is a docker file instruction using this we can copy to the image while building files/folders 
-
 docker cp Is a command copy files/dirs to container or to a system
-
-
-
 what is the use of docker diff?
--------------------------------
-
-docker diff <cid/cname>
-
-
-
-what is docker commit?
+-------------------------------docker diff <cid/cname>
+what is docker commit? create image from running container
 -----------------------
-
 docker commit <cid/cname> kkeducation12345/java-web-app:24
-
-
-=================================================================================================================
-
+===========================================================
 How to inspect a container?
 ---------------------------
-
 docker inspect <cid/cname>
-
 docker inspect --format "{{.NetworkSettings.IPAddress}}" mavenapp
-
 docker inspect --format "{{.State.Pid}}" 0d2dab452ceb
-
 docker inspect --format "{{.NetworkSettings.IPAddress}},{{.State.Status}}" 0d2dab452ceb
-
 docker inspect --format "IP Address: {{.NetworkSettings.Networks.bridge.IPAddress}}, Name: {{.Name}}" mavenapp
-
-
