@@ -253,8 +253,19 @@ CMD echo "three"
 IQ] can you have a more than one CMD in a Dockerfile?
  Ans: Yes you have, But only the last one/ recent one in the order will be executed while creating a container.
 
-
-
+------------------------------
+FROM debian:12.0
+LABEL author="vara"
+LABEL email="abc@gmail.com"
+RUN echo "welcome to kkfunda"
+RUN echo "welcome to java"
+RUN apt update -y
+RUN echo "welcome to docker concept"
+RUN apt install git -y
+RUN echo "hello devops"
+RUN echo "welcome to kkfunda"
+cmd echo "hello cmd"
+-------------------------------                                 
 
 
 
