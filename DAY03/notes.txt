@@ -35,6 +35,7 @@ How to rename the container?
 docker inspect -f '{{.state.startedAt}}' <containerid>
 docker inspect -f '{{.state.status}}' <containerid>
 dangling images:
+-------------------
 if any image repository and tag is showing as none is called dangling images,container is running state i am trying to delete forcefully 
 >docker images -f dangling=true
 >docker images -f dangling=true  -q   =displayed only ids
