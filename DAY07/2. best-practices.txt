@@ -1,9 +1,9 @@
 Docker Best Practices
 --------------------
 
-1. Try to use offical images only to build your own images(custom images)
+1. Try to use offical images only to build your own images(custom images)--always use official images tomcat
 
-2. try to use alpine images as base images where its possible/available.
+2. try to use alpine(light weight) images as base images where its possible/available.
 
 3. Don't copy/add  unnecessary files/folders which are not required,  size of image will increase, If you are not interested to copy files or dirs, Then keep those in .dockerignore file.
 
