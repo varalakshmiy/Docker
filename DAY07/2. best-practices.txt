@@ -32,7 +32,7 @@ FROM nginx:alpine
 COPY index.html /usr/share/nginx/html
 #NOTE: create index.html in build context
 
-
+--docker build -t nginximage -f Dockerfile1 .
 
 
 
