@@ -18,7 +18,16 @@ IQ] what is the difference between CMD and ENTRYPOINT?
 ANS: both r docker file instru
 
   --> CMD instructions are overriden while creating a container, But ENTRYPOINT instructions can't be overrriden while creating a container.
-  --> Both the instructions are used to start our container.
+  --> Both the instructions are used to start our container.cmd instruction passed arg to the entry point.
+----------------------------------------------------
+1)cmd "date"
+entrypoint["echo","welcome"]====o/p:- welcome date
+-------------------------------------------------
+2)cmd "date"
+entrypoint["echo","welcome"]
+>docker run containername echo "hello"   ====>o/p:- welcome echo hello
+-------------------------------------------------------
+
 
 IQ] can we keep both CMD and ENTRYPOINT instructions in a Dockerfile?
 
@@ -49,6 +58,7 @@ ENTRYPOINT ["echo","Hello"]
 
 
 IQ] what is the difference between COPY and docker cp?
+copy is docker file instru copy all files and dir local linux to docker image,cp is not a docker file instruction,
 
 IQ] what is the difference between RUN and docker run?
 
