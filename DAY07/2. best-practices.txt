@@ -1,0 +1,207 @@
+Docker Best Practices
+--------------------
+
+1. Try to use offical images only to build your own images(custom images)
+
+2. try to use alpine images as base images where its possible/available.
+
+3. Don't copy/add  unnecessary files/folders which are not required,  size of image will increase, If you are not interested to copy files or dirs, Then keep those in .dockerignore file.
+
+
+   --> Don't install unnecessary softwares also
+
+COPY . .
+
+4. Try to redue the number of layers of an image as much as possible, By combining related 	commands to RUN instruction.
+
+5. Use multi stage docker builds to reduse the size and number of layers of a image.
+
+6. Try to run container as a non-root user.
+
+7. Run a shell script to remove unused and dangling images on daily basis.
+
+
+
+
+
+
+Docker file 1
+-------------
+
+FROM nginx:alpine
+COPY index.html /usr/share/nginx/html
+#NOTE: create index.html in build context
+
+
+
+
+
+
+Docker file 2
+--------------
+
+FROM openjdk:11-jdk
+WORKDIR /app
+COPY target/maven-standalone-application*.jar maven-standalone-application.jar 
+CMD ["java","-jar","maven-standalone-application.jar"]
+
+
+
+
+
+
+
+Docker file 3 --> alpine example
+-------------
+
+FROM alpine:latest
+MAINTAINER KKFUNDA <kkeducationblr@gmail.com>
+LABEL author="kkfunda"
+LABEL email="kkeducationblr@gmail.com"
+RUN echo "welcome to kkkfunda"
+COPY test.sh test.sh
+WORKDIR /opt/app
+RUN apt update -y
+RUN apt install git wget -y
+RUN mkdir -p /opt/app
+
+ENV HOME /opt/app
+RUN echo $HOME
+
+CMD ["echo","Hello"]
+
+--------
+
+FROM alpine:latest
+MAINTAINER KKFUNDA <kkeducationblr@gmail.com>
+LABEL author="kkfunda"
+LABEL email="kkeducationblr@gmail.com"
+RUN echo "welcome to kkkfunda"
+COPY test.sh test.sh
+RUN apk update
+RUN apk add git wget
+CMD ["sh","test.sh"]
+
+
+
+
+
+
+
+
+Docker file 4 --> Dont copy unnecessary files and dirs
+----------------
+
+FROM tomcat:8.0.21-jre8
+COPY target/maven-web-application.war /usr/local/tomcat/webapps/maven-web-application.war
+COPY . .
+
+
+IQ] what is .dockerignore   file?
+
+Ans:
+
+
+
+
+
+
+
+
+
+
+
+
+
+Docker file 5 --> Reduse the number of layers
+-------------
+
+FROM debian:12.0
+MAINTAINER KKFUNDA <kkeducationblr@gmail.com>
+LABEL author="kkfunda"
+LABEL email="kkeducationblr@gmail.com"
+RUN echo "welcome to kkkfunda"
+COPY test.sh test.sh
+WORKDIR /opt/app
+RUN apt update -y
+RUN apt install git wget -y
+RUN mkdir -p /opt/app
+RUN echo "welcome to kk devops"
+
+
+
+
+
+Docker file 6 ---> Try to run as a normal user
+-------------
+
+# Use the official Tomcat image as the base image
+FROM tomcat:9.0
+
+# Create a new user and group
+RUN groupadd -r myusergroup && \
+    useradd -r -m -g myusergroup -s /bin/bash kkdevops
+
+# Change ownership of Tomcat directories to the new user
+RUN chown -R kkdevops:myusergroup /usr/local/tomcat && \
+    chmod -R 755 /usr/local/tomcat
+
+# Switch to the new user
+USER kkdevops
+
+# Optionally, add custom configuration or application files
+# COPY ./my-app.war /usr/local/tomcat/webapps/
+
+# Expose the port Tomcat runs on
+EXPOSE 8080
+
+# Set the default command to run Tomcat
+CMD ["catalina.sh", "run"]
+
+--------------
+
+FROM test3:latest
+
+# Switch to root user
+USER root
+
+
+Docker file 7  ---> Multi stage Docker file
+--------------
+FROM tomcat:9.0.100
+
+# Install Maven
+RUN apt update && apt install maven -y
+
+# Set working directory for building the app
+WORKDIR /app
+
+# Copy all files from local source to /app inside the container
+COPY . .
+
+# Build the Maven project
+RUN mvn clean package
+
+# Change working directory to Tomcat webapps folder
+WORKDIR /usr/local/tomcat/webapps
+
+# Copy the built WAR file to Tomcat's webapps directory
+RUN cp /app/target/maven-web-app*.war /usr/local/tomcat/webapps/maven-web-app.war
+
+
+
+
+
+
+
+-----------
+
+FROM maven:3.9.6-eclipse-temurin-17 AS aaa
+WORKDIR /app
+COPY . .
+RUN mvn clean package
+
+FROM tomcat:9.0.100
+COPY --from=aaa /app/target/maven-web-app*.war /usr/local/tomcat/webapps/maven-web-app.war
+
+
