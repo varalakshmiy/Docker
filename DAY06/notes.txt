@@ -10,7 +10,7 @@
 
 --> ARG values are not available after building an image, i.e Running container won't access the ARG values.
 
-
+arg we can use image level only ---env we can use both image and container level
 
 
 
