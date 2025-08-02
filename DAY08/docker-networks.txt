@@ -77,8 +77,9 @@ step 2: ping with another container ip
 yum update
 yum install -y iputils
 
-
-
+for ubuntu
+---------
+apt update && apt install iputils-ping -y
 
 ping 172.17.0.3
 
@@ -93,7 +94,8 @@ Dis advantage of bridge n/w: If container restarted we are not guarantee to get 
 
 IQ] what is the difference between default bridge network and custom bridge network?
 
-Ans: Incase of default bridge network the communication can happen through only IP address. Where as in custom bridge network the communication can happen through the IP address/ container name.
+Ans: Incase of default bridge network the communication can happen through only IP address. Where as in custom bridge network the communication can happen 
+through the IP address/ container name.
 
 
 How to create a network in docker?
@@ -110,8 +112,9 @@ docker inspect <network-name>
 
 How to remove a unused networks?
 --------------------------------
-
-docker system prune or docker network prune  or docker network rm <nwtwork-name>
+docker network prune  or docker network rm <nwtwork-name>
+docker system prune 
+   -this will remove all stoped containers,,all n/w not used by atleast one container,all dangling images,unused build cache.
 
 
 How to create a container in network?
@@ -126,7 +129,6 @@ docker exec -it javawebapp bash
 ping mavenwebapp
 
 
-
 =================================================================
 
 
@@ -134,7 +136,7 @@ NOTE: same container might part of another networks also.
 
 How to add that container to another network?
 
-docker network connect  jionetwork javawebappbridge
+docker network connect  jio-retail one
 
 docker inspect javawebappbridge
 
