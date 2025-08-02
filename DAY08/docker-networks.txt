@@ -119,7 +119,7 @@ docker system prune
 
 How to create a container in network?
 -------------------------------------
-
+docker network create -d bridge jioservice
 docker run -d -p 8080:8080 --network jionetwork --name mavenwebapp kkeducation123456/maven-web-app:1.2
 
 docker run -d -p 8081:8080 --network jionetwork --name javawebapp kkeducation123456/maven-web-app:1.2
@@ -136,19 +136,19 @@ NOTE: same container might part of another networks also.
 
 How to add that container to another network?
 
-docker network connect  jio-retail one
+docker network connect  jioservice one
 
-docker inspect javawebappbridge
+docker inspect jioservice
 
 ---------------------------------
 
 How to disconnect the container from network?
+--------------------------------------
 
-docker network disconnect  jionetwork javawebappbridge
+docker network disconnect jioservice one
+docker inspect one
 
-docker inspect javawebappbridge
-
-
+docker network rm --network jioservice
 ===================================================================
 
 
