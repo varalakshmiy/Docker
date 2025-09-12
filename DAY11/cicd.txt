@@ -1,0 +1,1 @@
+https://gettingstartedwithdocker.hashnode.dev/building-cicd-pipeline-jenkins-and-sonarqube-docker-image-on-ci-server-remote-docker-deployment-via-cd-server
