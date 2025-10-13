@@ -1,6 +1,7 @@
 wt type of automation u implemented ,monitoring
 ------------------------------------
-unused images,n/w volumes removed ,cron enable i wrte onescript,approval in lower env ,after we send into production run ,we reduced syatem space ,docker server fast response.
+unused images,n/w volumes removed ,cron enable i wrte onescript,approval in lower env ,after we send into production run ,
+we reduced syatem space ,docker server fast response.
 
 8. ENTRYPOINT
 -------------
