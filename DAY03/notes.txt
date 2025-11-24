@@ -103,9 +103,12 @@ docker stats <cid/cname>==hw can check cpu/m/y
 docker run -d --memory="100m" -p 8081:8087 --name welcome1 varalakshmi089/maven-web-application:9.0.1
 IQ: Is it possible to allocate cutom memory?
 Ans: Yes
+
 docker run --memory="512m" -d -p 8082:8080 --name javawebapp2 kkeducation12345/java-web-app:1
+out of memory killed error(container minimus usage m/y 100m if assign less than that it show oomkilled error,that con it show first create,after that it is not in up state,still is alive,after u increase m/y it wont allow to increase,u delete con after create another one)
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 docker run --memory="64m" -d -p 8082:8080 --name javawebapp2 kkeducation12345/java-web-app:1  --> Here container will be killed.
-docker inspect <cid> --> OOMKilled
+docker inspect javawebapp2 --> OOMKilled=true  it shows
 
 
 what is docker commit? create image from running container
