@@ -65,7 +65,12 @@ docker unpause <cid/cname>
 docker ps --filter status="paused"
 docker ps --filter status="paused" -q =====it will display obly paused container ids
 --cm to unpause containers----
+------------------------------
 >docker unpause $(docker ps --filter status="paused" -q)
+status of containers:
+=================
+creted,up,existed,pause,unpause state
+------------------------------
 How to delete only paused containers?
 -------------------------------------
 docker rm -f $(docker ps --filter status="paused")
