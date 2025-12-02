@@ -150,7 +150,8 @@ RUN mkdir -p /opt/application
 RUN echo "welcome to kk devops"
 
 CMD ["date"]
-
+op: d
+-------------------
  docker build -t firstimage1 .
  docker run --name firstc1 firstimage1
 
@@ -175,7 +176,8 @@ CMD ["date"]
 
 CMD ["echo","java"]
 
-
+o/p:java
+-----------
 sample Docker file 4
 ---------------------
 
@@ -236,7 +238,8 @@ ENTRYPOINT ["ls","-lrth"]
 docker build -t imageone .
 docker run imageone
 docker run imageone date
-
+o/p: ls lrth
+------------
 
 sample dockerfile 7
 -------------------
@@ -257,7 +260,8 @@ RUN echo "welcome to kk devops"
 
 ENTRYPOINT ["ls","-lrth"]
 ENTRYPOINT ["date"]
-
+o/p: date
+---------
 
 sample dockerfile 8
 --------------------
@@ -277,6 +281,7 @@ RUN echo "welcome to kk devops"
 
 CMD ["pwd"]
 ENTRYPOINT ["echo","Welcome"]
-
+o/p: welcomepwd
+================
 
 ---> show the ngnix and jenkins Dockerfiles
